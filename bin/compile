@@ -30,8 +30,8 @@ fi
 cat >$BUILD_DIR/bin/startcloudyproxyboi <<EOF
 #!/bin/sh
 echo "-----> [Compile > startcloudyproxyboi] Adding credentials JSON (/app/google/credentials.json)"
-printf "%s" "\$GCLOUD_CREDENTIALS" | base64 --decode > /app/google/credentials.json
-exec /app/google/bin/cloud_sql_proxy -credential_file=/app/google/credentials.json -instances=\$GCLOUD_INSTANCE -dir=/tmp &
+printf "%s" "\$GCLOUD_SQL_CREDENTIALS_BASE64" | base64 --decode > /app/google/credentials.json
+exec /app/google/bin/cloud_sql_proxy -credential_file=/app/google/credentials.json -instances=\$GCLOUD_SQL_INSTANCE_CONNECTION_NAME -dir=/tmp &
 EOF
 chmod +x $BUILD_DIR/bin/startcloudyproxyboi
 
